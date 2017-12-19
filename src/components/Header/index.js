@@ -11,7 +11,7 @@ const Header = (props) => {
   return (
     <div className="header">
       <div className="header-container">
-        <h1>{title}</h1>
+        <div className="title">{title}</div>
         <ul>
           {
             map(route => <Link className="header-link" key={route.path} to={route.path}>{route.title}</Link>, routes)

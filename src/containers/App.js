@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import { map } from 'rambda'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
@@ -23,15 +23,15 @@ class App extends Component {
       <div>
         <Header title="腾讯数字彩" routes={routes} />
         {this.props.test}
-          <Switch>
-            {
+        <Switch>
+          {
             map(route => <Route key={route.path} {...route} />, routes)
           }
-          </Switch>
-            <Footer />
+        </Switch>
+        <Footer />
       </div>
     )
   }
 }
 
-export default App
+export default withRouter(App)

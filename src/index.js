@@ -16,7 +16,7 @@ const store = createStore(
   applyMiddleware(thunk),
 )
 
-const Root = (
+const RootHtml = () => (
   <Provider store={store}>
     <Router>
       <App />
@@ -24,4 +24,4 @@ const Root = (
   </Provider>
 )
 
-render(Root, document.querySelector('#app'))
+render(<RootHtml />, document.querySelector('#app'))
