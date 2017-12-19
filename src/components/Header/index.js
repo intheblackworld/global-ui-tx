@@ -14,7 +14,7 @@ const Header = (props) => {
         <h1>{title}</h1>
         <ul>
           {
-            map(route => <Link className="header-link" to={route.path}>{route.title}</Link>, routes)
+            map(route => <Link className="header-link" key={route.path} to={route.path}>{route.title}</Link>, routes)
           }
         </ul>
       </div>
@@ -24,7 +24,7 @@ const Header = (props) => {
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
-  routes: PropTypes.arrayOf.isRequired,
+  routes: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
 export default Header

@@ -15,7 +15,7 @@ import './App.scss'
 }))
 class App extends Component {
   static propTypes = {
-    test: PropTypes.arrayOf.isRequired,
+    test: PropTypes.arrayOf(PropTypes.number).isRequired,
   }
 
   render() {
