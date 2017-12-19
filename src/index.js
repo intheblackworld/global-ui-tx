@@ -1,8 +1,27 @@
-import './index.css'
-
 import React from 'react'
-import {render} from 'react-dom'
+import { render } from 'react-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 
-import App from './App'
+import rootReducer from './reducers'
+import App from './containers/App'
 
-render(<App/>, document.querySelector('#app'))
+import './index.scss'
+
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(thunk),
+)
+
+const Root = (
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
+)
+
+render(Root, document.querySelector('#app'))

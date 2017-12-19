@@ -23,11 +23,16 @@
   },
   "dependencies": {
     "antd": "^3.0.2",
+    "axios": "^0.17.1",
+    "lodash": "^4.17.4",
+    "rambda": "^1.0.6",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.3",
@@ -39,7 +44,8 @@
     "eslint-plugin-react": "^7.5.1",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
-    "nwb": "0.19.x"
+    "nwb": "0.19.x",
+    "nwb-sass": "^0.8.2"
   },
   "author": "",
   "license": "MIT",
