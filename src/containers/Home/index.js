@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import OnlineCount from 'components/OnlineCount'
-import TableContainer from 'components/TableContainer'
+import TableContainer from 'containers/TableContainer'
 import { fetchTxList, fetchTx } from 'actions'
 import { connect } from 'react-redux'
 import moment from 'moment'
 
 import { toDate } from 'utils/moment'
 
+import './index.scss'
 
 @connect(
   state => ({
@@ -26,7 +27,7 @@ class Home extends Component {
 
     this.handleQueryChange = this.handleQueryChange.bind(this)
   }
-  
+
   static propTypes = {
     txCollection: PropTypes.object.isRequired,
     txCurrent: PropTypes.object.isRequired,
@@ -51,13 +52,19 @@ class Home extends Component {
     const { txCurrent } = this.props
     return (
       <div>
-        <OnlineCount {...txCurrent}/>
-        <TableContainer
-          txList={dataList}
-          rowCount={rowCount}
-          handleQueryChange={this.handleQueryChange}
-        />
-        {/* <Pagination /> */}
+        <OnlineCount {...txCurrent} type={'normal'} />
+        <div className="container">
+          <TableContainer
+            txList={dataList}
+            rowCount={rowCount}
+            tableType={'home'}
+            handleQueryChange={this.handleQueryChange}
+            needDatePicker={true}
+            needPageSize={true}
+            needPagination={true}
+            needFilter={false}
+          />
+        </div>
       </div>
     )
   }

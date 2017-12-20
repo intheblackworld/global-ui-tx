@@ -1,4 +1,4 @@
-import { Home, Mmc, Tx3D } from '../containers'
+import { Home, Ffc, Tx3D } from '../containers'
 
 const routes = [
   {
@@ -8,8 +8,8 @@ const routes = [
     title: '首页',
   },
   {
-    path: '/mmc',
-    component: Mmc,
+    path: '/ffc',
+    component: Ffc,
     exact: true,
     title: '腾讯分分彩',
   },

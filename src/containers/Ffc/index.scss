@@ -1,0 +1,39 @@
+.ant-tabs {
+  width: 1200px;
+  margin: 0 auto !important;
+  background: white;
+}
+
+.ant-tabs-bar {
+  border-bottom: 2px solid #2b75c1 !important;
+}
+
+.ant-tabs-nav .ant-tabs-tab:hover, .ant-tabs-nav .ant-tabs-tab:active {
+  color: #2b75c1 !important;
+}
+
+.ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+  margin-right: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  border-top: 1px solid #e0e0e0 !important;
+  border-right: 1px solid #e0e0e0 !important;
+  background-color: white !important;
+
+  &::nth-child(1) {
+    border-left: 1px solid #e0e0e0 !important;
+  }
+}
+
+.ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
+  background-color: #2b75c1 !important;
+  color: white !important;
+}
+
+.ant-tabs-content {
+  padding: 7px !important;
+}
+
+.ant-tabs-nav-wrap {
+  padding: 0 7px !important;
+}
