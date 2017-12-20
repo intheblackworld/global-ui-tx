@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
-import test from './test'
+import fetchTxListReducer from './fetchTxList'
+import fetchTxReducer from './fetchTx'
 
 const rootReducer = combineReducers({
-  test,
+  txList: fetchTxListReducer,
+  txCurrent: fetchTxReducer
 })
 
 export default rootReducer

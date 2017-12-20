@@ -15,16 +15,16 @@ const OnlineNumber = (props) => {
   return (
     <div className="online-number-container">
       {
-        mapWithIndex((number, index) => {
+        numberList && mapWithIndex((number, index) => {
           if (index === 2 || index === 5) {
             return (
-              <div>
+              <div key={index}>
                 <div className="unit">{number}</div>
                 <div className="dot"></div>
               </div>
             )
           } else {
-            return <div className="unit">{number}</div>
+            return <div key={index} className="unit">{number}</div>
           }
         })(numberList)
       }

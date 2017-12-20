@@ -9,20 +9,12 @@ import routes from '../routes'
 
 import './App.scss'
 
-
-@connect(state => ({
-  test: state.test,
-}))
 class App extends Component {
-  static propTypes = {
-    test: PropTypes.arrayOf(PropTypes.number).isRequired,
-  }
 
   render() {
     return (
       <div>
         <Header title="腾讯数字彩" routes={routes} />
-        {this.props.test}
         <Switch>
           {
             map(route => <Route key={route.path} {...route} />, routes)

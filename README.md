@@ -26,7 +26,7 @@ Ant Design
 redux-logger
 
 
-
+### ServerUrl
 http://52.196.185.136
 
 {{url}}/lottery/open/txcurrent.json

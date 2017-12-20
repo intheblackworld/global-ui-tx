@@ -4,6 +4,7 @@
   height: 148px;
   background: white;
   margin: 0 auto;
+  margin-top: 30px;
 }
 .online-container:before, .online-container:after {
   z-index: -1;
@@ -105,5 +106,9 @@
   a {
     color: #d45b58;
     text-decoration: underline;
+
+    &:hover, &:active {
+      color: lighten(#d45b58, 10%)
+    }
   }
 }

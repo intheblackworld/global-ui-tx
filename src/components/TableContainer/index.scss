@@ -1,0 +1,58 @@
+.table-container {
+  width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  min-height: 610px;
+  margin-bottom: 120px;
+
+  a {
+    color: #2b75c1;
+  }
+}
+
+.table-row, .table-row td, .ant-table-thead > tr > th {
+  text-align: center !important;
+  padding: 0 !important;
+  height: 40px !important;
+  color: #666;
+}
+
+.ant-table-thead > tr > th {
+  background: #f8f8f8;
+}
+
+.table-row {
+
+  &:nth-child(odd) td {
+    background: white;
+  }
+
+  &:nth-child(even) td {
+    background: #f8f8f8 ;
+  }
+  
+}
+
+
+.ant-table-thead tr > th.table-header {
+  background: #2b75c1;
+  height: 40px;
+  font-size: 14px;
+  color: white;
+  padding: 0;
+}
+
+.ant-pagination-item-active {
+  background: #2b75c1 !important;
+  border-color: #2b75c1 !important;
+
+  & a {
+    color: white !important;
+  }
+}
+
+.ant-table-pagination.ant-pagination {
+  margin: 32px auto 16px !important;
+  float: none !important;
+  text-align: center !important;
+}
