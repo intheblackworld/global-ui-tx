@@ -1,13 +1,14 @@
 import { reduce } from 'rambda'
+import _ from 'lodash'
 
 // 计算总和 数字
-export function totalAmount(numberList) {
+export const totalAmount = (numberList) => {
   const iteratorFn = (acc, val) => parseInt(acc, 10) + parseInt(val, 10)
-  return reduce(iteratorFn, 1)(numberList)
+  return reduce(iteratorFn, 0)(numberList)
 }
 
 // 计算总和 字串 总和 字串 ex. 大单
-export function totalResult(numberList) {
+export const totalResult = (numberList) => {
   let firstChar
   let secondChar
   const total = totalAmount(numberList)
@@ -26,7 +27,7 @@ export function totalResult(numberList) {
 }
 
 // 计算 各位数结果 ex.大单
-export function calculateByUnit(numberList, index) {
+export const calculateByUnit = (numberList, index) => {
   const currentNumber = parseInt(numberList[index], 10)
 
   let firstChar
@@ -46,7 +47,7 @@ export function calculateByUnit(numberList, index) {
 }
 
 // 计算 大小比 大小比 ex.3:2
-export function calculateBSRatio(numberList) {
+export const calculateBSRatio = (numberList) => {
   let smallArray = []
   let bigArray = []
   numberList.forEach((number) => {
@@ -60,7 +61,7 @@ export function calculateBSRatio(numberList) {
 }
 
 // 计算 单双比 单双比 ex.3:2
-export function calculateOERatio(numberList) {
+export const calculateOERatio = (numberList) => {
   let oddArray = []
   let evenArray = []
   numberList.forEach((number) => {
@@ -74,7 +75,33 @@ export function calculateOERatio(numberList) {
 }
 
 // 计算 龙虎 ex.龙, 虎
-export const calculateDT = () => {
+export const calculateDT = (numberList) => {
+  let tenThousandNumber = numberList[0]
+  let bit = numberList[4]
+
+  if (tenThousandNumber > bit) {
+    return '龙'
+  } else if (tenThousandNumber < bit) {
+    return '虎'
+  } else {
+    return '和'
+  }
+}
+
+// 计算 组态 ex. 组三, 组六, 豹子
+export const calculateGroup = (numberList) => {
+  let counts = {}
+  numberList.forEach((x) => {
+    counts[x] = (counts[x] || 0) + 1;
+  })
+  
+  if ((_.invert(counts))[3]) {
+    return '豹子'
+  } else if ((_.invert(counts))[2]) {
+    return '组六'
+  } else {
+    return '组三'
+  }
   
 }
 

@@ -11,8 +11,6 @@ import { fetchTxList, fetchTx } from 'actions'
 import OnlineCount from 'components/OnlineCount'
 import TableContainer from 'containers/TableContainer'
 
-import './index.scss'
-
 @connect(
   state => ({
     txCollection: state.txList,
@@ -23,7 +21,7 @@ import './index.scss'
     fetchTxList: (reqData) => dispatch(fetchTxList(reqData))
   })
 )
-class Ffc extends Component {
+class Ffc3d extends Component {
 
   constructor(props) {
     super(props)
@@ -59,13 +57,13 @@ class Ffc extends Component {
 
     return (
       <div>
-        <OnlineCount { ...txCurrent } type={"red"} ticket={"ffc"}/>
+        <OnlineCount { ...txCurrent } type={"red"} ticket={"ffc3d"}/>
         <Tabs type="card">
           <TabPane tab="开奖历史" key="1">
             <TableContainer
               txList={dataList}
               rowCount={rowCount}
-              tableType={'ffc'}
+              tableType={'ffc3d'}
               handleQueryChange={this.handleQueryChange}
               needDatePicker={true}
               needPageSize={false}
@@ -95,4 +93,4 @@ class Ffc extends Component {
   }
 }
 
-export default Ffc
+export default Ffc3d

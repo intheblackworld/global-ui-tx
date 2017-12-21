@@ -1,4 +1,4 @@
-import { Home, Ffc, Tx3D } from '../containers'
+import { Home, Ffc, Ffc3d } from '../containers'
 
 const routes = [
   {
@@ -15,7 +15,7 @@ const routes = [
   },
   {
     path: '/3d',
-    component: Tx3D,
+    component: Ffc3d,
     exact: true,
     title: '腾讯3D',
   },

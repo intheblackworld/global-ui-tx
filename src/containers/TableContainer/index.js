@@ -8,9 +8,10 @@ import { toTime, toDate } from 'utils/moment'
 import { CustomModal } from 'components/CustomModal'
 import TableDatePicker from 'components/Form/TableDatePicker'
 import TableSelect from 'components/Form/TableSelect'
+import TableFilterGroup from 'components/Form/TableFilterGroup'
 
 import * as calculate from 'utils/calculate' // 拿开奖号码计算各种结果的函式库
-import { HomeColumns, FfcColumns } from './tableConfig'
+import { HomeColumns, FfcColumns, Ffc3dColumns } from './tableConfig'
 
 import './index.scss'
 
@@ -26,6 +27,7 @@ class TableContainer extends Component {
     this.handlePageSizeChange = this.handlePageSizeChange.bind(this)
     this.handleDateChange = this.handleDateChange.bind(this)
     this.handlePageIndexChange = this.handlePageIndexChange.bind(this)
+    this.handleSpecialFilterChange = this.handleSpecialFilterChange.bind(this)
     this.openDialogHandler = this.openDialogHandler.bind(this)
     this.closeDialogHandler = this.closeDialogHandler.bind(this)
 
@@ -35,7 +37,7 @@ class TableContainer extends Component {
     // 根据传入的参数决定要显示什么控件: 日期控件, pageSize, pagination
     txList: PropTypes.arrayOf(PropTypes.object),
     rowCount: PropTypes.number,
-    handleQueryChange: PropTypes.func.isRequired,
+    handleQueryChange: PropTypes.func,
     needDatePicker: PropTypes.bool.isRequired,
     needPageSize: PropTypes.bool.isRequired,
     needPagination: PropTypes.bool.isRequired,
@@ -48,6 +50,7 @@ class TableContainer extends Component {
     this.props.handleQueryChange({
       day: value ? toDate(value) : toDate(moment()),
       pageSize: this.state.pageSize,
+      // 除了首页有分页之外，其他页面没有分页，所以 pageSize 设成1440就可
       pageIndex: 0,
     })
     this.setState({ day: value })
@@ -71,6 +74,18 @@ class TableContainer extends Component {
     })
   }
 
+  handleSpecialFilterChange({ day, pageSize, pageIndex }) { // 近100期, 今日
+    this.props.handleQueryChange({
+      day: this.state.day ? this.state.day : day,
+      pageSize,
+      pageIndex
+    })
+    this.setState({
+      pageSize,
+      day
+    })
+  }
+
   optionList = () => [
     {
       value: 20,
@@ -83,6 +98,7 @@ class TableContainer extends Component {
   ]
 
   openDialogHandler(e) {
+    e.preventDefault()
     const text = e.currentTarget.text
     let dialogType
     let currentItem
@@ -115,7 +131,7 @@ class TableContainer extends Component {
 
   render() {
     const { txList, rowCount } = this.props
-    
+
     const {
       needDatePicker,
       needPageSize,
@@ -155,7 +171,21 @@ class TableContainer extends Component {
             bit: calculate.calculateByUnit(ffc, 4), // 个位 ex.小单
             bsRatio: calculate.calculateBSRatio(ffc),// 大小比 ex.3:2
             oeRatio: calculate.calculateOERatio(ffc),// 单双比 ex.3:2
-            dtResult: '龙'// 万个龙虎 ex.龙, 虎
+            dtResult: calculate.calculateDT(ffc)// 万个龙虎 ex.龙, 虎
+          }
+        })(txList)
+        break;
+      case 'ffc3d':
+        Columns = Ffc3dColumns
+        dataSource = mapWithIndex((tx, index) => {
+          const ffc3d = tx.ffc3d.split(',')
+          return {
+            ...tx,
+            startTime: toTime(tx.startTime),
+            totalAmount: calculate.totalAmount(ffc3d), // 总和 数字
+            bsRatio: calculate.calculateBSRatio(ffc3d),// 大小比 ex.3:2
+            oeRatio: calculate.calculateOERatio(ffc3d),// 单双比 ex.3:2
+            groupResult: calculate.calculateGroup(ffc3d)// 型态 ex.组三
           }
         })(txList)
         break;
@@ -164,10 +194,13 @@ class TableContainer extends Component {
         break;
     }
 
-    
+
 
     return (
       <div className="table-container">
+        {
+          needFilter && <TableFilterGroup onClick={this.handleSpecialFilterChange} />
+        }
         {
           needDatePicker && <TableDatePicker onChange={this.handleDateChange} />
         }

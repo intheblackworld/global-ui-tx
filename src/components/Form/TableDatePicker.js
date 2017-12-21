@@ -11,7 +11,6 @@ const TableDatePicker = (props) => {
       <label>查询日期：</label>
       <DatePicker
         onChange={props.onChange}
-        placeholder={''}
         defaultValue={moment()}
       />
     </div>

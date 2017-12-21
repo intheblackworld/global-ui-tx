@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import OnlineCount from 'components/OnlineCount'
-import TableContainer from 'containers/TableContainer'
-import { fetchTxList, fetchTx } from 'actions'
 import { connect } from 'react-redux'
 import moment from 'moment'
 
 import { toDate } from 'utils/moment'
+
+import { fetchTxList, fetchTx } from 'actions'
+
+import OnlineCount from 'components/OnlineCount'
+import TableContainer from 'containers/TableContainer'
 
 import './index.scss'
 

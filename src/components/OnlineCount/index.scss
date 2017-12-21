@@ -45,6 +45,38 @@
   color: #333;
 }
 
+.online-logo-ffc3d {
+  background: url('~images/online-logo-ffc3d.png');
+  width: 107px;
+  height: 88px;
+  float: left;
+  margin-left: 25px;
+  margin-top: 20px;
+}
+
+.online-logo-ffc {
+  background: url('~images/online-logo-ffc.png');
+  width: 106px;
+  height: 88px;
+  float: left;
+  margin-left: 25px;
+  margin-top: 20px;
+}
+
+.online-planId {
+  float: left;
+  width: 130px;
+  height: 38px;
+  color: #333;
+  font-size: 14px;
+  text-align: right;
+  margin-top: 50px;
+
+  span {
+    color: #c82e2a;
+  }
+}
+
 .online-content-right {
   float: left;
   width: 418px;
@@ -68,7 +100,7 @@
   }
 }
 
-.online-number-container {
+.online-number-normal {
   margin: 15px auto 10px;
   width: 658px;
   height: 55px;
@@ -94,6 +126,32 @@
   font-weight: bold;
   margin-right: 14px;
   line-height: 54px;
+}
+
+.online-number-red {
+  float: left;
+  margin-left: 24px;
+  margin-top: 30px;
+  .unit {
+    background: url('~images/red-unit.png');
+    width: 65px;
+    height: 69px;
+    line-height: 76px;
+    font-size: 27px;
+    margin-right: 10px;
+  }
+}
+
+.online-btn {
+  margin-top: 52px !important;
+  background: linear-gradient(to bottom, #fff, #e4e4e4) !important;
+  border: 1px solid #c1c1c1 !important;
+  float: right !important;
+  margin-right: 20px !important;
+}
+
+.ant-tabs-bar {
+  margin-bottom: 0 !important;
 }
 
 .online-hint {

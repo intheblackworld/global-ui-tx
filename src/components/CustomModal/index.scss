@@ -1,0 +1,101 @@
+.modal {
+  border-radius: 4px;
+}
+
+.modal-title {
+  text-align: center;
+  color: white;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.modal-subtitle {
+  text-align: center;
+  color: white;
+  font-size: 14px;
+}
+
+.ant-modal-header {
+  background: #2b75c1 !important;
+  height: 80px !important;
+}
+
+.ant-modal-close-x {
+  width: 26px !important;
+  height: 26px !important;
+  line-height: 26px !important;
+  font-size: 16px;
+  background: white;
+  border-radius: 26px !important;
+  margin-right: 15px !important;
+  margin-top: 20px !important;
+}
+
+.ant-modal-close-x:before {
+  color: #2b75c1;
+}
+
+.modal-content {
+  font-size: 14px;
+  color: #666666;
+  
+  span {
+    color: #c82e2a;
+  }
+}
+
+.ant-modal-content {
+  border-radius: 7px !important;
+}
+
+.ant-modal-body {
+  padding: 35px 40px !important;
+  height: 320px !important;
+}
+
+.red-unit-small {
+  background: url('~images/red-unit-small.png');
+  width: 36px;
+  height: 39px;
+  color: white;
+  float: left;
+  margin-right: 8px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 16px;
+}
+
+.openNumber-label {
+  float: left;
+  color: #666;
+  font-size: 14px;
+  margin-top: 20px;
+  height: 40px;
+  margin-right: 20px;
+}
+
+.openNumber-ball {
+  float: left;
+  height: 40px;
+  margin-top: 8px;
+  line-height: 40px;
+}
+
+.ant-modal-footer {
+  border-top: none !important;
+  padding: 18px !important;
+
+  .ant-btn {
+    display: none !important;
+  }
+
+  .ant-btn-primary {
+    display: block !important;
+    margin: 0 auto !important;
+    background: linear-gradient(#2b75c1, #2f85dc,#2b75c1) !important;
+    border: none !important;
+    width: 126px !important;
+    height: 36px !important;
+    line-height: 36px !important;
+  }
+}

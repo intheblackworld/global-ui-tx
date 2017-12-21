@@ -77,6 +77,11 @@ export const FfcColumns = (dialogHandler) => (
       dataIndex: 'ffc',
       key: 'ffc',
       className: 'table-header',
+      render: (text, record) => (
+        <span>
+          <a href="#" onClick={dialogHandler}>{`${text}`}</a>
+        </span>
+      )
     }, {
       title: '在线人数',
       dataIndex: 'data',
@@ -146,3 +151,59 @@ export const FfcColumns = (dialogHandler) => (
 )
 
 // 3D 表格栏位设定
+
+export const Ffc3dColumns = (dialogHandler) => (
+  [
+    {
+      title: '开奖时间',
+      dataIndex: 'statTime',
+      key: 'statTime',
+      className: 'table-header',
+    }, {
+      title: '期号',
+      dataIndex: 'planId',
+      key: 'planId',
+      className: 'table-header',
+    }, {
+      title: '开奖号码',
+      dataIndex: 'ffc3d',
+      key: 'ffc3d',
+      className: 'table-header',
+      render: (text, record) => (
+        <span>
+          <a href="#" onClick={dialogHandler}>{`${text}`}</a>
+        </span>
+      )
+    }, {
+      title: '在线人数',
+      dataIndex: 'data',
+      key: 'data',
+      className: 'table-header',
+    }, {
+      title: '波动值',
+      dataIndex: 'change',
+      key: 'change',
+      className: 'table-header',
+    }, {
+      title: '总和',
+      dataIndex: 'totalAmount',
+      key: 'totalAmount',
+      className: 'table-header',
+    }, {
+      title: '大小比',
+      dataIndex: 'bsRatio',
+      key: 'bsRatio',
+      className: 'table-header',
+    }, {
+      title: '单双比',
+      dataIndex: 'oeRatio',
+      key: 'oeRatio',
+      className: 'table-header',
+    }, {
+      title: '型态',
+      dataIndex: 'groupResult',
+      key: 'groupResult',
+      className: 'table-header',
+    },
+  ]
+)
