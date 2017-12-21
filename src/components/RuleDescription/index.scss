@@ -1,0 +1,39 @@
+.desc-title {
+  text-align: center;
+  font-size: 16px;
+  color: #333;
+  font-weight: bold;
+  margin: 20px auto 60px;
+}
+
+.desc-content {
+  padding: 0 120px 0 60px;
+  ul {
+    padding-left: 0;
+  }
+
+  li {
+    list-style: none;
+    font-size: 14px;
+    color: #333;
+    line-height: 40px;
+
+    span {
+      color: #c82e2a;
+    }
+    p {
+      display: inline-block;
+      margin-bottom: 0;
+      line-height: 30px;
+    }
+  }
+
+  .list-icon {
+    width: 14px;
+    height: 14px;
+    background: url('~images/list-icon.png');
+    display: inline-block;
+    margin-right: 10px;
+    margin-left: 32px;
+  }
+}

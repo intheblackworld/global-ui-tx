@@ -55,3 +55,7 @@
   float: none !important;
   text-align: center !important;
 }
+
+.ant-tabs:not(.ant-tabs-vertical) > .ant-tabs-content > .ant-tabs-tabpane {
+  min-height: 610px;
+}
