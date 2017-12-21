@@ -11,6 +11,7 @@ import { fetchTxList, fetchTx } from 'actions'
 import OnlineCount from 'components/OnlineCount'
 import RuleDescription from 'components/RuleDescription'
 import TableContainer from 'containers/TableContainer'
+import Combo from 'containers/Combo'
 
 @connect(
   state => ({
@@ -58,7 +59,7 @@ class Ffc3d extends Component {
 
     return (
       <div>
-        <OnlineCount { ...txCurrent } type={"red"} ticket={"ffc3d"}/>
+        <OnlineCount { ...txCurrent } type={"red"} ticket={"ffc3d"} />
         <Tabs type="card">
           <TabPane tab="开奖历史" key="1">
             <TableContainer
@@ -73,9 +74,7 @@ class Ffc3d extends Component {
             />
           </TabPane>
           <TabPane tab="路珠分析" key="2">
-            <p>Content of Tab Pane 2</p>
-            <p>Content of Tab Pane 2</p>
-            <p>Content of Tab Pane 2</p>
+            <Combo comboControlType={'ffc3d'} />
           </TabPane>
           <TabPane tab="走势分析" key="3">
             <p>Content of Tab Pane 3</p>
@@ -83,11 +82,11 @@ class Ffc3d extends Component {
             <p>Content of Tab Pane 3</p>
           </TabPane>
           <TabPane tab="开奖说明" key="4">
-            <RuleDescription type={'ffc3d'}/>
+            <RuleDescription type={'ffc3d'} />
           </TabPane>
         </Tabs>
       </div>
-      
+
     )
   }
 }

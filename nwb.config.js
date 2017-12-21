@@ -15,7 +15,7 @@ module.exports = {
   },
   devServer: {
     proxy: {
-      "*": {
+      "/lottery/open/**": {
         target: "http://52.196.185.136",
         changeOrigin: true,
       }

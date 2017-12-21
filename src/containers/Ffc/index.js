@@ -11,6 +11,7 @@ import { fetchTxList, fetchTx } from 'actions'
 import OnlineCount from 'components/OnlineCount'
 import RuleDescription from 'components/RuleDescription'
 import TableContainer from 'containers/TableContainer'
+import Combo from 'containers/Combo'
 
 import './index.scss'
 
@@ -75,9 +76,7 @@ class Ffc extends Component {
             />
           </TabPane>
           <TabPane tab="路珠分析" key="2">
-            <p>Content of Tab Pane 2</p>
-            <p>Content of Tab Pane 2</p>
-            <p>Content of Tab Pane 2</p>
+          <Combo comboControlType={'ffc'}/>
           </TabPane>
           <TabPane tab="走势分析" key="3">
             <p>Content of Tab Pane 3</p>
