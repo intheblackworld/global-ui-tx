@@ -7,7 +7,7 @@ import './index.scss'
 
 const TableDatePicker = (props) => {
   return (
-    <div className="form-control">
+    <div className={`form-control ${props.className}`}>
       <label>查询日期：</label>
       <DatePicker
         onChange={props.onChange}

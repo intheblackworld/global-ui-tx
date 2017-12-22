@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { map, addIndex } from 'rambda'
+import { map, addIndex } from 'ramda'
 import { Button } from 'antd';
 
 

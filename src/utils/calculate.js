@@ -1,4 +1,4 @@
-import { reduce } from 'rambda'
+import { reduce } from 'ramda'
 import _ from 'lodash'
 
 // 计算总和 数字
@@ -88,7 +88,7 @@ export const calculateDT = (numberList) => {
   }
 }
 
-// 计算 组态 ex. 组三, 组六, 豹子
+// 计算 形态 ex. 组三, 组六, 豹子
 export const calculateGroup = (numberList) => {
   let counts = {}
   numberList.forEach((x) => {
@@ -102,7 +102,11 @@ export const calculateGroup = (numberList) => {
   } else {
     return '组三'
   }
-  
+}
+
+// 为数量加上逗号
+export const numberWithCommas = (x) => {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { numberWithCommas } from 'utils/calculate'
+
 import NormalOnlineContent from './normal'
 import RedOnlineContent from './red'
 
@@ -20,7 +22,7 @@ class OnlineCount extends Component {
 
   }
   static propTypes = {
-    startTime: PropTypes.number, // 统计时间
+    statTime: PropTypes.number, // 统计时间
     data: PropTypes.number, // 在线人数
     change: PropTypes.number, // 波动值
     planId: PropTypes.string, // 期号
@@ -47,7 +49,7 @@ class OnlineCount extends Component {
   }
 
   render() {
-    const { startTime, data, change, type } = this.props
+    const { statTime, data, change, type } = this.props
     return (
       <div className="online-container">
         <div className="online-content-left">
@@ -61,11 +63,11 @@ class OnlineCount extends Component {
         <div className="online-content-right">
           <div>
             <div className="title">上一分钟在线人数：</div>
-            <div className="result">{data - change}</div>
+            <div className="result">{numberWithCommas(data - change)}</div>
           </div>
           <div>
             <div className="title">实时波动值：</div>
-            <div className="result highlight">{`${change}`}</div>
+            <div className="result highlight">{`${change >= 0 ? '+' : ''}${change}`}</div>
           </div>
         </div>
 

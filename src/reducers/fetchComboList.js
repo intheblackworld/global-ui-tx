@@ -1,27 +1,4 @@
 const initState = {
-  LLH: {
-    comboList: [], // 龙虎
-  },
-  tenThousands: {
-    oddEvenDisplay: [], // 万位单双
-    sizeDisplay: [], // 万位大小
-  },
-  thousands: {
-    oddEvenDisplay: [],
-    sizeDisplay: [],
-  },
-  hundreds: {
-    oddEvenDisplay: [],
-    sizeDisplay: [],
-  },
-  tens: {
-    oddEvenDisplay: [],
-    sizeDisplay: [],
-  },
-  units: {
-    oddEvenDisplay: [],
-    sizeDisplay: [],
-  },
 }
 const fetchComboListReducer = (state = initState, action) => {
   switch (action.type) {

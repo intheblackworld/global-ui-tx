@@ -29,6 +29,7 @@ class Combo extends Component {
     }
 
     this.handleControlChange = this.handleControlChange.bind(this)
+    this.handleLimitChange = this.handleLimitChange.bind(this)
   }
 
 
@@ -38,16 +39,18 @@ class Combo extends Component {
 
   handleLimitChange(limit) {
     const { comboControlType } = this.props
+    const { currentLocation } = this.state
     const config = this.getConfigByType(comboControlType)
     this.setState({
+      ...config,
       limit,
       currentLimit: limit,
-      ...config
+      locations: currentLocation
     })
 
     this.props.fetchComboList({
-      limit,
       ...this.state,
+      limit
     })
   }
 
@@ -96,7 +99,7 @@ class Combo extends Component {
 
   componentDidMount() {
     const { comboControlType } = this.props
-    const { limit, locations, currentLimit, currentLocation } = this.state
+    const { limit, locations, currentLocation } = this.state
     const config = this.getConfigByType(comboControlType)
     this.props.fetchComboList({
       url: 'combo.json',
@@ -127,12 +130,16 @@ class Combo extends Component {
         />
         {/* 路珠渲染元件 */}
         <ComboContainer 
-          currentLimit={currentLocation} 
+          currentLimit={currentLimit} 
           {...this.props} 
           {...controlConfig} 
           handleLimitChange={this.handleLimitChange}
         />
-        <div>我是露珠分析</div>
+        <div className="combo-desc">*当连续开出的相同号码属性中断时，则另起一列显示；</div>
+        <div className="combo-desc">*左侧为历史开奖，最右一列为最新开奖；</div>
+        <div className="combo-desc">*大：5-9，小：0-4，单：单数号码，双：双数号码；</div>
+        <div className="combo-desc">总和：总和即五位开奖号码相加的和值，总和大：23-45；总和小：0-22，总和为单数；总和双：总和为双数；</div>
+        <div className="combo-desc">{`龙虎：龙：万位开奖号码>个位开奖号码；虎：万位开奖号码<个位开奖号码；和：万位开奖号码=个位开奖号码；`}</div>
       </div>
     )
   }

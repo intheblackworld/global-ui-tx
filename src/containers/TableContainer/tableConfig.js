@@ -142,7 +142,7 @@ export const FfcColumns = (dialogHandler) => (
       key: 'oeRatio',
       className: 'table-header',
     }, {
-      title: '万位龙虎',
+      title: '万个龙虎',
       dataIndex: 'dtResult',
       key: 'dtResult',
       className: 'table-header',
@@ -200,7 +200,7 @@ export const Ffc3dColumns = (dialogHandler) => (
       key: 'oeRatio',
       className: 'table-header',
     }, {
-      title: '型态',
+      title: '形态',
       dataIndex: 'groupResult',
       key: 'groupResult',
       className: 'table-header',

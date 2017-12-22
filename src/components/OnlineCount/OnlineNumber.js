@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { map, pipe, toString, split, addIndex } from 'rambda'
+import { map, pipe, toString, split, addIndex } from 'ramda'
 
 import './index.scss'
 

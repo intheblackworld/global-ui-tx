@@ -28,7 +28,7 @@
     "moment": "^2.20.1",
     "prop-types": "^15.6.0",
     "qs": "^6.5.1",
-    "rambda": "^1.0.6",
+    "ramda": "^0.25.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.6",
@@ -47,7 +47,7 @@
     "eslint-plugin-react": "^7.5.1",
     "husky": "^0.14.3",
     "lint-staged": "^6.0.0",
-    "nwb": "0.19.x",
+    "nwb": "^0.19.2",
     "nwb-sass": "^0.8.2"
   },
   "author": "",

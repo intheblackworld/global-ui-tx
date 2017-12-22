@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, Switch, withRouter } from 'react-router-dom'
-import { map } from 'rambda'
+import { map } from 'ramda'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Header from '../components/Header'

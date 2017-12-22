@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { Table } from 'antd'
-import { map, addIndex, find } from 'rambda'
+import { map, addIndex, find } from 'ramda'
 import moment from 'moment'
 import { toTime, toDate } from 'utils/moment'
 
@@ -150,7 +150,9 @@ class TableContainer extends Component {
         dataSource = mapWithIndex((tx, index) => {
           return {
             ...tx,
-            startTime: toTime(tx.startTime),
+            data: calculate.numberWithCommas(tx.data),
+            change: `${tx.change >=0 ? '+' : ''}${tx.change}`,
+            statTime: toTime(tx.statTime),
           }
         })(txList)
 
@@ -161,7 +163,9 @@ class TableContainer extends Component {
           const ffc = tx.ffc.split(',')
           return {
             ...tx,
-            startTime: toTime(tx.startTime),
+            data: calculate.numberWithCommas(tx.data),
+            change: `${tx.change >=0 ? '+' : ''}${tx.change}`,
+            statTime: toTime(tx.statTime),
             totalAmount: calculate.totalAmount(ffc), // 总和 数字
             totalResult: calculate.totalResult(ffc), // 总和 字串 ex. 大单
             tenThousand: calculate.calculateByUnit(ffc, 0), // 万位 ex.大单
@@ -181,11 +185,13 @@ class TableContainer extends Component {
           const ffc3d = tx.ffc3d.split(',')
           return {
             ...tx,
-            startTime: toTime(tx.startTime),
+            data: calculate.numberWithCommas(tx.data),
+            change: `${tx.change >=0 ? '+' : ''}${tx.change}`,
+            statTime: toTime(tx.statTime),
             totalAmount: calculate.totalAmount(ffc3d), // 总和 数字
             bsRatio: calculate.calculateBSRatio(ffc3d),// 大小比 ex.3:2
             oeRatio: calculate.calculateOERatio(ffc3d),// 单双比 ex.3:2
-            groupResult: calculate.calculateGroup(ffc3d)// 型态 ex.组三
+            groupResult: calculate.calculateGroup(ffc3d)// 形态 ex.组三
           }
         })(txList)
         break;
@@ -202,7 +208,7 @@ class TableContainer extends Component {
           needFilter && <TableFilterGroup onClick={this.handleSpecialFilterChange} />
         }
         {
-          needDatePicker && <TableDatePicker onChange={this.handleDateChange} />
+          needDatePicker && <TableDatePicker onChange={this.handleDateChange} className={tableType === 'home' ? '' : 'small-margin'}/>
         }
         {
           needPageSize && <TableSelect onChange={this.handlePageSizeChange} optionList={this.optionList()} />

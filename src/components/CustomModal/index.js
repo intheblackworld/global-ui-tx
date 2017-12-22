@@ -1,7 +1,8 @@
 import React from 'react'
-import { map, addIndex } from 'rambda'
+import { map, addIndex } from 'ramda'
 import { Modal } from 'antd'
-import { totalAmount } from 'utils/calculate'
+import { totalAmount, numberWithCommas } from 'utils/calculate'
+
 
 import './index.scss'
 
@@ -56,7 +57,7 @@ export const CustomModal = ({ modalData, modalVisible, closeDialogHandler }) => 
       {
         isFfc(dialogType) ?
           <div className="modal-content">
-            <p>当期腾讯在线人数：<span>{data}</span></p>
+            <p>当期腾讯在线人数：<span>{numberWithCommas(data)}</span></p>
             <p>万位：<span>{ffcTenThousand}</span> (在线人数各位数和取尾数 <span>{ffcFun} = {ffcTotal}</span>, 取尾数<span>{ffcTenThousand}</span>)</p>
             <p>千位：<span>{ffcThousand}</span> (在线人数倒数第4位数)</p>
             <p>百位：<span>{ffcHundred}</span> (在线人数倒数第3位数)</p>
@@ -64,7 +65,7 @@ export const CustomModal = ({ modalData, modalVisible, closeDialogHandler }) => 
             <p>个位：<span>{ffcBit}</span> (在线人数倒数第1位数)</p>
           </div> :
           <div className="modal-content">
-            <p>当期腾讯在线人数：<span>{data}</span></p>
+            <p>当期腾讯在线人数：<span>{numberWithCommas(data)}</span></p>
             <p>百位：<span>{ffc3dHundred}</span> (在线人数倒数第1位数 + 倒数第6位数=<span>{lastUnit(dataList, 1)} + {lastUnit(dataList, 6)} = {lastUnit(dataList, 1) + lastUnit(dataList, 6)}</span>， 取尾数<span>{ffc3dHundred}</span>)</p>
             <p>十位：<span>{ffc3dTen}</span> (在线人数倒数第2位数 + 倒数第5位数=<span>{lastUnit(dataList, 2)} + {lastUnit(dataList, 5)} = {lastUnit(dataList, 2) + lastUnit(dataList, 5)}</span>，取尾数<span>{ffc3dTen}</span>)</p>
             <p>个位：<span>{ffc3dBit}</span> (在线人数倒数第3位数 + 倒数第4位数=<span>{lastUnit(dataList, 3)} + {lastUnit(dataList, 4)} = {lastUnit(dataList, 3) + lastUnit(dataList, 4)}</span>，取尾数<span>{ffc3dBit}</span>)</p>

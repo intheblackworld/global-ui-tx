@@ -3,6 +3,11 @@
   margin-top: 30px;
   margin-bottom: 20px;
 
+  &.small-margin {
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
   &.right {
     float: right;
   }

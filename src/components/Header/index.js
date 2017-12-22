@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { map } from 'rambda'
+import { map } from 'ramda'
 import { Link } from 'react-router-dom'
 
 import './index.scss'

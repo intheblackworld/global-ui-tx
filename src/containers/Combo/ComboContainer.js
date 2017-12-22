@@ -1,9 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { map, addIndex } from 'ramda'
+
 import ComboSection from './ComboSection'
 
 const ComboContainer = (props) => {
+  
+
   const {
     tenThousands,
     thousands,
@@ -11,51 +15,131 @@ const ComboContainer = (props) => {
     tens,
     units,
     sumValues,
-    LHH,
+    LLH,
   } = props.comboList
 
+  const typeNameList = ['大小', '单双']
+
+  const mapWithIndex = addIndex(map)
+
+  const renderComboSection = (location) => {
+    return mapWithIndex((name, index) => (
+      <ComboSection
+        key={index}
+        sectionType="default"
+        currentLimit={currentLimit}
+        handleLimitChange={props.handleLimitChange}
+        typeName={name}
+        bigCount={location.sizeDisplay.bgCount}
+        smallCount={location.sizeDisplay.slCount}
+        oddCount={location.oddEvenDisplay.odCount}
+        evenCount={location.oddEvenDisplay.enCount}
+        comboList={name === '大小' ? location.sizeDisplay.comboList : location.oddEvenDisplay.comboList}
+        />
+    ))(typeNameList)
+  }
+
+  const renderLLHComboSection = (location) => {
+    return (
+      <ComboSection
+        sectionType="LLH"
+        currentLimit={currentLimit}
+        handleLimitChange={props.handleLimitChange}
+        typeName={'龙虎'}
+        lCount={location.LLH.lCount}
+        hCount={location.LLH.hCount}
+        comboList={location.LLH.comboList}
+        />
+    )
+  }
+
+  const renderSumValueComboSection = (location) => {
+    return mapWithIndex((name, index) => (
+      <ComboSection
+        key={index}
+        sectionType="sum"
+        currentLimit={currentLimit}
+        handleLimitChange={props.handleLimitChange}
+        typeName={name}
+        bigCount={location.sumBS.bgCount}
+        smallCount={location.sumBS.slCount}
+        oddCount={location.sumOE.odCount}
+        evenCount={location.sumOE.enCount}
+        comboList={name === '大小' ? location.sumBS.comboList : location.sumOE.comboList}
+        />
+    ))(typeNameList)
+  }
+
   const {
-    currentLocation
+    currentLimit
   } = props
   return (
     <div>
       {
-        tenThousands && <ComboSection currentLocation={currentLocation} handleLimitChange={props.handleLimitChange} typeName={'大小'} bigCount={45} smallCount={55} oddCount={22} evenCount={78} />
+        tenThousands && <div>
+          {
+            renderComboSection(tenThousands)
+          }
+        </div>
       }
 
       {
-        thousands && <ComboSection currentLocation={currentLocation} handleLimitChange={props.handleLimitChange} typeName={'大小'} bigCount={45} smallCount={55} oddCount={22} evenCount={78} />
+        thousands && <div>
+          {
+            renderComboSection(thousands)
+          }
+        </div>
       }
 
       {
-        hundreds && <ComboSection currentLocation={currentLocation} handleLimitChange={props.handleLimitChange} typeName={'大小'} bigCount={45} smallCount={55} oddCount={22} evenCount={78} />
+        hundreds && <div>
+          {
+            renderComboSection(hundreds)
+          }
+        </div>
       }
 
       {
-        tens && <ComboSection currentLocation={currentLocation} handleLimitChange={props.handleLimitChange} typeName={'大小'} bigCount={45} smallCount={55} oddCount={22} evenCount={78} />
+        tens && <div>
+          {
+            renderComboSection(tens)
+          }
+        </div>
       }
 
       {
-        units && <ComboSection currentLocation={currentLocation} handleLimitChange={props.handleLimitChange} typeName={'大小'} bigCount={45} smallCount={55} oddCount={22} evenCount={78} />
+        units && <div>
+          {
+            renderComboSection(units)
+          }
+        </div>
       }
 
       {
-        sumValues && <ComboSection currentLocation={currentLocation} handleLimitChange={props.handleLimitChange} typeName={'大小'} bigCount={45} smallCount={55} oddCount={22} evenCount={78} />
+        sumValues && <div>
+          {
+            renderSumValueComboSection(sumValues)
+          }
+        </div>
       }
 
       {
-        LHH && <ComboSection currentLocation={currentLocation} handleLimitChange={props.handleLimitChange} typeName={'大小'} bigCount={45} smallCount={55} oddCount={22} evenCount={78} />
+        LLH && <div>
+          {
+            renderLLHComboSection(LLH)
+          }
+        </div>
       }
 
 
-      
+
     </div>
   )
 }
 
 ComboContainer.propTypes = {
   handleLimitChange: PropTypes.func.isRequired,
-  currentLocation: PropTypes.number,
+  currentLimit: PropTypes.number,
 }
 
 export default ComboContainer

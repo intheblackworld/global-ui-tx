@@ -1,5 +1,5 @@
 const initState = {
-  startTime: 1333333333,
+  statTime: 1333333333,
   data: 240018030,
   change: -1,
   planId: "201712190123",
