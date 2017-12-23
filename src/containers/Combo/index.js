@@ -21,7 +21,6 @@ class Combo extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      url: 'combo.json',
       currentLocation: 0,
       currentLimit: 100,
       limit: 100,
@@ -102,7 +101,6 @@ class Combo extends Component {
     const { limit, locations, currentLocation } = this.state
     const config = this.getConfigByType(comboControlType)
     this.props.fetchComboList({
-      url: 'combo.json',
       ticketId: config.ticketId, // 31 //分分彩  36 //3D彩
       limit: 100, // 近100期
       locations: 0, // // 0,1,2,3,4,99: 万, 千, 百, 十, 个, 总和

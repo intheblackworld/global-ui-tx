@@ -53,6 +53,9 @@ export const fetchComboListSuccess = (payload) => {
 }
 
 export const fetchComboList = (data) => {
+  data = Object.assign(data, {}, {
+    url: 'combo.json',
+  })
   return (dispatch) => {
     return jsonp(data)
       .then(response => {
