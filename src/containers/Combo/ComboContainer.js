@@ -6,8 +6,6 @@ import { map, addIndex } from 'ramda'
 import ComboSection from './ComboSection'
 
 const ComboContainer = (props) => {
-  
-
   const {
     tenThousands,
     thousands,

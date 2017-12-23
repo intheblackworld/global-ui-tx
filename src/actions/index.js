@@ -69,3 +69,31 @@ export const fetchComboList = (data) => {
       })
   }
 }
+
+
+
+export const fetchTrendListSuccess = (payload) => {
+  return {
+    type: 'FETCH_TREND_LIST_SUCCESS',
+    payload
+  }
+}
+
+export const fetchTrendList = (data) => {
+  data = Object.assign(data, {}, {
+    playSeriesId: 20001,
+    url: 'sscTrend.json',
+  })
+  return (dispatch) => {
+    return jsonp(data)
+      .then(response => {
+        return response.json()
+      })
+      .then((res) => {
+        return dispatch(fetchTrendListSuccess(res.root))
+      })
+      .catch(error => {
+        throw (error)
+      })
+  }
+}
