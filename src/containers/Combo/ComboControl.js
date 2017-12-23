@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { map, addIndex } from 'ramda'
-import { Button } from 'antd';
+import { Button } from 'antd'
 
 
-export const ComboControl = (props) => {
+const ComboControl = (props) => {
   const { locations, currentLocation } = props
 
   const mapWithIndex = addIndex(map)

@@ -12,6 +12,7 @@ import OnlineCount from 'components/OnlineCount'
 import RuleDescription from 'components/RuleDescription'
 import TableContainer from 'containers/TableContainer'
 import Combo from 'containers/Combo'
+import Trend from 'containers/Trend'
 
 import './index.scss'
 
@@ -79,9 +80,7 @@ class Ffc extends Component {
           <Combo comboControlType={'ffc'}/>
           </TabPane>
           <TabPane tab="走势分析" key="3">
-            <p>Content of Tab Pane 3</p>
-            <p>Content of Tab Pane 3</p>
-            <p>Content of Tab Pane 3</p>
+            <Trend ticketId={31} />
           </TabPane>
           <TabPane tab="开奖说明" key="4">
             <RuleDescription type={'ffc'}/>

@@ -1,4 +1,8 @@
 const initState = {
+  trendsList: [],
+  counStat: {
+    
+  },
 }
 const fetchTrendListReducer = (state = initState, action) => {
   switch (action.type) {

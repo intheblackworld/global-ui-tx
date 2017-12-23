@@ -1,10 +1,33 @@
-import { map, range, addIndex } from 'ramda'
+import { map, range, addIndex, find } from 'ramda'
+import _ from 'lodash'
+import React from 'react'
 
-const rowWithNumber = map((index) => ({
+const rowWithNumber = (unit) => map((index) => ({
   title: index,
-  dataIndex: index,
-  key: index,
+  dataIndex: unit+index,
+  key: unit+index,
   width: 20,
+  render: (text, row, index) => {
+    let item
+    if (index >= row.columnLength) {
+      item = text
+    } else {
+      row.openUnitList.some((openUnit) => {
+        if (openUnit === text) {
+          if (openUnit.includes('千位') || openUnit.includes('十位')) {
+            item = <span className={`trend-red ${openUnit.slice(0, 2)}`}>{text.split('')[text.split('').length - 1]}</span>
+          } else {
+            item = <span className={`trend-blue ${openUnit.slice(0, 2)}`}>{text.split('')[text.split('').length - 1]}</span>
+          }
+        } else {
+          item = text
+        }
+        return openUnit === text
+      })
+    }
+    
+    return item
+  }
 }))(range(0, 10))
 
 const unitList = ['万位', '千位', '百位', '十位', '个位']
@@ -12,7 +35,7 @@ const unitListRow = map((unit) => ({
   title: unit,
   className: 'table-header-gray',
   children: [
-    ...rowWithNumber
+    ...rowWithNumber(unit)
   ]
 }))(unitList)
 
@@ -20,17 +43,40 @@ export const BasicTrendColumns = [
   {
     title: '期号',
     className: 'table-header-gray',
-    key: 'planId',
-    dataIndex: 'planId',
+    key: 'ticketPlanId',
+    dataIndex: 'ticketPlanId',
     render: (text, row, index) => {
-      if (index < row.length - 4) {
-        return { text }
-      } else if (index < row.length - 3) {
+      if (index === row.columnLength) {
         return {
           children: '出现总次数',
           props: {
-            colspan: 5
+            colSpan: 2,
           }
+        }
+      } else if (index === row.columnLength + 1) {
+        return {
+          children: '平均遗漏值',
+          props: {
+            colSpan: 2,
+          }
+        }
+      } else if (index === row.columnLength + 2) {
+        return {
+          children: '最大遗漏值',
+          props: {
+            colSpan: 2,
+          }
+        }
+      } else if (index === row.columnLength + 3) {
+        return {
+          children: '最大连出值',
+          props: {
+            colSpan: 2,
+          }
+        }
+      } else {
+        return {
+          children: text
         }
       }
     }
@@ -38,8 +84,21 @@ export const BasicTrendColumns = [
   {
     title: '开奖号码',
     className: 'table-header-gray',
-    key: 'number',
-    dataIndex: 'number'
+    key: 'openResult',
+    dataIndex: 'openResult',
+    render: (text, row, index) => {
+      if (index >= row.columnLength) {
+        return {
+          props: {
+            colSpan: 0
+          }
+        }
+      } else {
+        return {
+          children: text
+        }
+      }
+    }
   },
 
   ...unitListRow
@@ -85,8 +144,8 @@ export const CompositeTrendColumns = [
   {
     title: '期号',
     className: 'table-header-gray',
-    key: 'planId',
-    dataIndex: 'planId',
+    key: 'ticketPlanId',
+    dataIndex: 'ticketPlanId',
     render: (text, row, index) => {
       if (index < row.length - 4) {
         return { text }
@@ -94,7 +153,7 @@ export const CompositeTrendColumns = [
         return {
           children: '出现总次数',
           props: {
-            colspan: 5
+            colSpan: 5
           }
         }
       }
@@ -103,8 +162,8 @@ export const CompositeTrendColumns = [
   {
     title: '开奖号码',
     className: 'table-header-gray',
-    key: 'number',
-    dataIndex: 'number'
+    key: 'openResult',
+    dataIndex: 'openResult'
   },
 
   ...compositeListRow
