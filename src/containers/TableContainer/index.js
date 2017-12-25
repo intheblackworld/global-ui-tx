@@ -151,7 +151,7 @@ class TableContainer extends Component {
           return {
             ...tx,
             data: calculate.numberWithCommas(tx.data),
-            change: `${tx.change >=0 ? '+' : ''}${tx.change}`,
+            change: `${tx.change >= 0 ? '+' : ''}${tx.change}`,
             statTime: toTime(tx.statTime),
           }
         })(txList)
@@ -164,7 +164,7 @@ class TableContainer extends Component {
           return {
             ...tx,
             data: calculate.numberWithCommas(tx.data),
-            change: `${tx.change >=0 ? '+' : ''}${tx.change}`,
+            change: `${tx.change >= 0 ? '+' : ''}${tx.change}`,
             statTime: toTime(tx.statTime),
             totalAmount: calculate.totalAmount(ffc), // 总和 数字
             totalResult: calculate.totalResult(ffc), // 总和 字串 ex. 大单
@@ -186,7 +186,7 @@ class TableContainer extends Component {
           return {
             ...tx,
             data: calculate.numberWithCommas(tx.data),
-            change: `${tx.change >=0 ? '+' : ''}${tx.change}`,
+            change: `${tx.change >= 0 ? '+' : ''}${tx.change}`,
             statTime: toTime(tx.statTime),
             totalAmount: calculate.totalAmount(ffc3d), // 总和 数字
             bsRatio: calculate.calculateBSRatio(ffc3d),// 大小比 ex.3:2
@@ -208,7 +208,7 @@ class TableContainer extends Component {
           needFilter && <TableFilterGroup onClick={this.handleSpecialFilterChange} />
         }
         {
-          needDatePicker && <TableDatePicker onChange={this.handleDateChange} className={tableType === 'home' ? '' : 'small-margin'}/>
+          needDatePicker && <TableDatePicker onChange={this.handleDateChange} className={tableType === 'home' ? '' : 'small-margin'} />
         }
         {
           needPageSize && <TableSelect onChange={this.handlePageSizeChange} optionList={this.optionList()} />
@@ -228,6 +228,25 @@ class TableContainer extends Component {
               } : false
           }
         />
+        {
+          tableType === 'ffc' && <div>
+            <div className="table-desc-title">说明</div>
+            <div className="table-desc">总和：总和即五位开奖号码相加的和值，总和大：23~45，总和小：0~22，总和单：总和为单数；总和双：总和为双数。</div>
+            <div className="table-desc">大小：开奖号码为0~4时为小，开奖号码为5~9时为大</div>
+            <div className="table-desc">单双：开奖号码为1、3、5、7、9时为单，开奖号码为0、2、4、6、8时为双</div>
+            <div className="table-desc">{`万个龙虎：万位开奖号码>个位开奖号码；虎：万位开奖号码<个位开奖号码；和：万位开奖号码=个位开奖号码；`}</div>
+          </div>
+        }
+
+        {
+          tableType === 'ffc3d' && <div>
+            <div className="table-desc-title">说明</div>
+            <div className="table-desc">总和：总和即三位开奖号码相加的和值，总和大：14~27，总和小：0~23，总和单：总和为单数；总和双：总和为双数。</div>
+            <div className="table-desc">大小：开奖号码为0~4时为小，开奖号码为5~9时为大</div>
+            <div className="table-desc">单双：开奖号码为1、3、5、7、9时为单，开奖号码为0、2、4、6、8时为双</div>
+            <div className="table-desc">{`形态：组六-三个开奖号码各不相同，组三-开奖号码中有两个相同号码，豹子-开奖号码为三个相同号码`}</div>
+          </div>
+        }
         <CustomModal
           modalData={this.state.modalData}
           modalVisible={this.state.modalVisible}

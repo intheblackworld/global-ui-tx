@@ -13,6 +13,22 @@
   }
 }
 
+.table-desc {
+  color: #666;
+  font-size: 12px;
+  line-height: 30px;
+  margin-left: 30px;
+}
+
+.table-desc-title {
+  font-weight: bold;
+  color: #666;
+  font-size: 12px;
+  line-height: 30px;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
 .table-row, .table-row td, .ant-table-thead > tr > th {
   text-align: center !important;
   padding: 0 !important;
