@@ -10,6 +10,8 @@ import { fetchTxList, fetchTx } from 'actions'
 
 import OnlineCount from 'components/OnlineCount'
 import RuleDescription from 'components/RuleDescription'
+import UnFinishHint from 'components/UnFinishHint'
+
 import TableContainer from 'containers/TableContainer'
 import Combo from 'containers/Combo'
 
@@ -76,11 +78,9 @@ class Ffc3d extends Component {
           <TabPane tab="路珠分析" key="2">
             <Combo comboControlType={'ffc3d'} />
           </TabPane>
-          {/* <TabPane tab="走势分析" key="3">
-            <p>Content of Tab Pane 3</p>
-            <p>Content of Tab Pane 3</p>
-            <p>Content of Tab Pane 3</p>
-          </TabPane> */}
+          <TabPane tab="走势分析" key="3">
+            <UnFinishHint desc={'开发中，敬请期待...'}/>
+          </TabPane>
           <TabPane tab="开奖说明" key="4">
             <RuleDescription type={'ffc3d'} />
           </TabPane>
