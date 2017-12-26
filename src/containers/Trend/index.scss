@@ -1,13 +1,120 @@
 .trend {
 
+  .trend-control {
+    .ant-btn {
+      width: 90px;
+      height: 24px;
+      font-size: 12px;
+      margin-right: 20px;
+      padding: 0;
 
+    }
+    .ant-btn-primary {
+      background: #2b75c1 !important;
+    }
+
+    .trend-control-block {
+      float: left;
+      margin-bottom: 20px;
+      margin-top: 10px;
+    }
+
+    .trend-control-block-right {
+      float: right;
+      margin-bottom: 20px;
+      margin-top: 10px;
+
+      .ant-btn {
+        background: transparent !important;
+        color: #666;
+        border: none !important;
+        outline: none !important;
+        width: 40px !important;
+      }
+      .ant-btn-primary {
+        background: transparent !important;
+        color: #2b75c1 !important;
+        border: none !important;
+        outline: none !important;
+      }
+
+      .ant-btn-clicked:after {
+        border: none !important;
+      }
+    }
+
+    .ant-checkbox-wrapper {
+      font-size: 12px;
+      color: #666;
+    }
+
+    .ant-checkbox-group {
+      margin-left: 40px;
+    }
+  }
   .trend-red {
     background: #d76865;
     color: white;
+    width: 14px;
+    display: inline-block;
+    border-radius: 2px;
+    width: 20px;
   }
 
   .trend-blue {
     background: #5d95cf;
     color: white;
+    width: 14px;
+    display: inline-block;
+    border-radius: 2px;
+    width: 20px;
+  }
+
+  .trend-desc {
+    margin-top: 30px;
+    font-size: 12px;
+    color: #666;
+
+    span {
+      font-weight: bold;  
+    }
+
+    p {
+      line-height: 30px;
+      margin: 0;
+    }
+  }
+
+  .table-row, .table-row td, .ant-table-thead > tr > th {
+    height: 20px !important;
+    font-size: 0.8em;
+  }
+
+  .table-row:nth-child(even) td {
+    background: white;
+  }
+
+  .table-row td {
+    color: #999 !important;
+  }
+
+  .ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+    word-break: normal !important;
+  }
+
+  .table-row td:nth-child(2) {
+    color: #cc3c38 !important;
+    letter-spacing: 2px;
+  }
+
+  @for $i from 1 to 5 {
+    .table-row:nth-last-child(#{$i}) td {
+      background: #f8f8f8 !important;
+      color: #999 !important;
+
+      &:nth-child(1) {
+        color: #333 !important;
+      }
+    }
   }
 }

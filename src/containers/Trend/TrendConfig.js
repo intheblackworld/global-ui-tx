@@ -4,8 +4,8 @@ import React from 'react'
 
 const rowWithNumber = (unit) => map((index) => ({
   title: index,
-  dataIndex: unit+index,
-  key: unit+index,
+  dataIndex: unit + index,
+  key: unit + index,
   width: 20,
   render: (text, row, index) => {
     let item
@@ -16,8 +16,22 @@ const rowWithNumber = (unit) => map((index) => ({
         if (openUnit === text) {
           if (openUnit.includes('千位') || openUnit.includes('十位')) {
             item = <span className={`trend-red ${openUnit.slice(0, 2)}`}>{text.split('')[text.split('').length - 1]}</span>
+          } else if (openUnit.includes('号码跨度')) {
+            item = <span className={`trend-red ${openUnit.slice(0, 4)}`}>{text.split('')[text.split('').length - 1]}</span>
+          } else if (openUnit.includes('号码分布')) {
+            if (text.includes('red')) {
+              item = <span className={`trend-red ${openUnit.slice(3, 7)}`}>{text.split('')[text.split('').length - 1]}</span>
+            } else {
+              item = <span className={`trend-blue ${openUnit.slice(0, 4)}`}>{text.split('')[text.split('').length - 1]}</span>
+            }
           } else {
             item = <span className={`trend-blue ${openUnit.slice(0, 2)}`}>{text.split('')[text.split('').length - 1]}</span>
+          }
+        } else if (row.redUnitList.length > 0 && text) {
+          if (text.toString().includes('red')) {
+            item = <span className={`trend-red ${openUnit.slice(3, 7)}`}>{text.split('')[text.split('').length - 1]}</span>
+          } else {
+            item = text  
           }
         } else {
           item = text
@@ -25,7 +39,7 @@ const rowWithNumber = (unit) => map((index) => ({
         return openUnit === text
       })
     }
-    
+
     return item
   }
 }))(range(0, 10))
@@ -33,7 +47,6 @@ const rowWithNumber = (unit) => map((index) => ({
 const unitList = ['万位', '千位', '百位', '十位', '个位']
 const unitListRow = map((unit) => ({
   title: unit,
-  className: 'table-header-gray',
   children: [
     ...rowWithNumber(unit)
   ]
@@ -42,7 +55,7 @@ const unitListRow = map((unit) => ({
 export const BasicTrendColumns = [
   {
     title: '期号',
-    className: 'table-header-gray',
+
     key: 'ticketPlanId',
     dataIndex: 'ticketPlanId',
     render: (text, row, index) => {
@@ -50,6 +63,7 @@ export const BasicTrendColumns = [
         return {
           children: '出现总次数',
           props: {
+            className: 'table-header-gray',
             colSpan: 2,
           }
         }
@@ -57,6 +71,7 @@ export const BasicTrendColumns = [
         return {
           children: '平均遗漏值',
           props: {
+            className: 'table-header-gray',
             colSpan: 2,
           }
         }
@@ -64,6 +79,7 @@ export const BasicTrendColumns = [
         return {
           children: '最大遗漏值',
           props: {
+            className: 'table-header-gray',
             colSpan: 2,
           }
         }
@@ -71,6 +87,7 @@ export const BasicTrendColumns = [
         return {
           children: '最大连出值',
           props: {
+            className: 'table-header-gray',
             colSpan: 2,
           }
         }
@@ -83,7 +100,6 @@ export const BasicTrendColumns = [
   },
   {
     title: '开奖号码',
-    className: 'table-header-gray',
     key: 'openResult',
     dataIndex: 'openResult',
     render: (text, row, index) => {
@@ -105,36 +121,43 @@ export const BasicTrendColumns = [
 ]
 
 const ratioList = ['5:0', '4:1', '3:2', '2:3', '1:4', '0:5']
-const compositeList = ['号码分布', '号码跨度', '大小比', '奇偶比', '质合比', '和值']
+const compositeList = ['号码分布', '号码跨度', '大小比', '奇偶比', '质合比']
 
-const rowWithRatio = map((ratio) => ({
+const rowWithRatio = (title) => map((ratio) => ({
   title: ratio,
-  dataIndex: ratio,
-  key: ratio
+  dataIndex: title + ratio,
+  key: title + ratio,
+  render: (text, row, index) => {
+    let item
+    if (index >= row.columnLength) {
+      item = text
+    } else {
+      row.openUnitList.some((openUnit) => {
+        if (openUnit === text) {
+          item = <span className={`trend-blue ${openUnit.slice(0, 3)}`}>{text.slice(3, 7)}</span>
+        } else {
+          item = text
+        }
+        return openUnit === text
+      })
+    }
+    return item
+  }
 }))(ratioList)
 
 const compositeListRow = map((title) => {
-  if (title === '和值') {
+  if (title === '大小比' || title === '奇偶比' || title === '质合比') {
     return {
       title,
-      className: 'table-header-gray',
-      dataIndex: 'sumValue',
-      key: 'sumValue',
-    }
-  } else if (title === '大小比' || title === '奇偶比' || title === '和值') {
-    return {
-      title,
-      className: 'table-header-gray',
       children: [
-        ...rowWithRatio
+        ...rowWithRatio(title)
       ]
     }
   } else {
     return {
       title,
-      className: 'table-header-gray',
       children: [
-        ...rowWithNumber
+        ...rowWithNumber(title)
       ]
     }
   }
@@ -143,28 +166,71 @@ const compositeListRow = map((title) => {
 export const CompositeTrendColumns = [
   {
     title: '期号',
-    className: 'table-header-gray',
     key: 'ticketPlanId',
     dataIndex: 'ticketPlanId',
     render: (text, row, index) => {
-      if (index < row.length - 4) {
-        return { text }
-      } else if (index < row.length - 3) {
+      if (index === row.columnLength) {
         return {
           children: '出现总次数',
           props: {
-            colSpan: 5
+            className: 'table-header-gray',
+            colSpan: 2,
           }
+        }
+      } else if (index === row.columnLength + 1) {
+        return {
+          children: '平均遗漏值',
+          props: {
+            className: 'table-header-gray',
+            colSpan: 2,
+          }
+        }
+      } else if (index === row.columnLength + 2) {
+        return {
+          children: '最大遗漏值',
+          props: {
+            className: 'table-header-gray',
+            colSpan: 2,
+          }
+        }
+      } else if (index === row.columnLength + 3) {
+        return {
+          children: '最大连出值',
+          props: {
+            className: 'table-header-gray',
+            colSpan: 2,
+          }
+        }
+      } else {
+        return {
+          children: text
         }
       }
     }
   },
   {
     title: '开奖号码',
-    className: 'table-header-gray',
     key: 'openResult',
-    dataIndex: 'openResult'
+    dataIndex: 'openResult',
+    render: (text, row, index) => {
+      if (index >= row.columnLength) {
+        return {
+          props: {
+            colSpan: 0
+          }
+        }
+      } else {
+        return {
+          children: text
+        }
+      }
+    }
   },
 
-  ...compositeListRow
+  ...compositeListRow,
+  {
+    title: '和值',
+    dataIndex: 'sumValue',
+    key: 'sumValue',
+  }
 ]
