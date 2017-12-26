@@ -60,6 +60,8 @@ class Trend extends Component {
     this.setState({
       trendTypeId,
       currentFilterValue: 30,
+      showLine: false,
+      showMiss: false,
 
       currentTrendTypeId: trendTypeId
     })
@@ -109,7 +111,7 @@ class Trend extends Component {
 
   render() {
     const { trendList } = this.props
-    const { currentFilterValue, currentTrendTypeId, trendTypeId } = this.state
+    const { currentFilterValue, currentTrendTypeId, trendTypeId, showLine, showMiss } = this.state
     return (
       <div className="trend">
         <TrendControl
@@ -118,12 +120,14 @@ class Trend extends Component {
           handleEffect={this.handleEffect}
           currentTrendTypeId={currentTrendTypeId}
           handleFilterChange={this.handleFilterChange}
+          showLine={showLine}
+          showMiss={showMiss}
         />
         <TrendTable
           trendList={this.props.trendList}
           trendTypeId={trendTypeId}
-          showLine={this.state.showLine}
-          showMiss={this.state.showMiss}
+          showLine={showLine}
+          showMiss={showMiss}
         />
         <div className="trend-desc">
           <p><span>出现总次数：</span>指在选定的期数范围内开出号码的总次数</p>

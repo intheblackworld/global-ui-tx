@@ -15,21 +15,21 @@ const rowWithNumber = (unit) => map((index) => ({
       row.openUnitList.some((openUnit) => {
         if (openUnit === text) {
           if (openUnit.includes('千位') || openUnit.includes('十位')) {
-            item = <span className={`trend-red ${openUnit.slice(0, 2)}`}>{text.split('')[text.split('').length - 1]}</span>
+            item = <span className={`trend-red  trend-red-${openUnit.slice(0, 2)}-${index}`}>{text.split('')[text.split('').length - 1]}</span>
           } else if (openUnit.includes('号码跨度')) {
-            item = <span className={`trend-red ${openUnit.slice(0, 4)}`}>{text.split('')[text.split('').length - 1]}</span>
+            item = <span className={`trend-red  trend-red-${openUnit.slice(0, 4)}-${index}`}>{text.split('')[text.split('').length - 1]}</span>
           } else if (openUnit.includes('号码分布')) {
             if (text.includes('red')) {
-              item = <span className={`trend-red ${openUnit.slice(3, 7)}`}>{text.split('')[text.split('').length - 1]}</span>
+              item = <span className={`trend-red  trend-red-${openUnit.slice(3, 7)}-${index}`}>{text.split('')[text.split('').length - 1]}</span>
             } else {
-              item = <span className={`trend-blue ${openUnit.slice(0, 4)}`}>{text.split('')[text.split('').length - 1]}</span>
+              item = <span className={`trend-blue  trend-blue-${openUnit.slice(0, 4)}-${index}`}>{text.split('')[text.split('').length - 1]}</span>
             }
           } else {
-            item = <span className={`trend-blue ${openUnit.slice(0, 2)}`}>{text.split('')[text.split('').length - 1]}</span>
+            item = <span className={`trend-blue  trend-blue-${openUnit.slice(0, 2)}-${index}`}>{text.split('')[text.split('').length - 1]}</span>
           }
         } else if (row.redUnitList.length > 0 && text) {
           if (text.toString().includes('red')) {
-            item = <span className={`trend-red ${openUnit.slice(3, 7)}`}>{text.split('')[text.split('').length - 1]}</span>
+            item = <span className={`trend-red  trend-red-${openUnit.slice(3, 7)}-${index}`}>{text.split('')[text.split('').length - 1]}</span>
           } else {
             item = text  
           }
@@ -134,7 +134,7 @@ const rowWithRatio = (title) => map((ratio) => ({
     } else {
       row.openUnitList.some((openUnit) => {
         if (openUnit === text) {
-          item = <span className={`trend-blue ${openUnit.slice(0, 3)}`}>{text.slice(3, 7)}</span>
+          item = <span className={`trend-blue trend-blue-${openUnit.slice(0, 3)}-${index}`}>{text.slice(3, 7)}</span>
         } else {
           item = text
         }

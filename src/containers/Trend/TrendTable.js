@@ -2,6 +2,8 @@ import React from 'react'
 import { Table } from 'antd'
 import { map, addIndex, range, isEmpty } from 'ramda'
 
+import Line from 'components/LineTo'
+
 import { calculateAvgMiss } from 'utils/calculate'
 
 import { BasicTrendColumns, CompositeTrendColumns } from './TrendConfig'
@@ -264,7 +266,8 @@ const TrendTable = (props) => {
     }
   }
   return (
-    <Table
+    <div>
+      <Table
       rowKey="uid"
       bordered
       dataSource={dataSource}
@@ -272,7 +275,34 @@ const TrendTable = (props) => {
       rowClassName="table-row"
       pagination={false}
     />
+    {
+      props.showLine && (
+        <div>
+          {
+            map(unit => {
+              if (unit === '万位' || unit === '百位' || unit === '个位' || unit === '奇偶比' || unit === '大小比' || unit === '质合比') {
+                return map((index) => 
+                  <Line key={index} from={`trend-blue-${unit}-${index}`} to={`trend-blue-${unit}-${index+1}`} color={'#5d95cf'} />
+                )(range(0, dataLength))
+              } else if ((unit === '千位' || unit === '十位' || unit === '号码跨度')){
+                return map((index) => 
+                  <Line key={index} from={`trend-red-${unit}-${index}`} to={`trend-red-${unit}-${index+1}`} color={'#d76865'} />
+                )(range(0, dataLength))
+              }
+            }
+            )(unitList.concat(specialNameList))
+          }
+        </div>
+      )
+    }
+    </div>
   )
 }
+
+
+// tr[0] > .trend-red.千位
+// tr[1] > .trend-red.千位
+// tr[2] > .trend-red.千位
+// tr[3] > .trend-red.千位
 
 export default TrendTable

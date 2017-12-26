@@ -69,7 +69,11 @@ const TrendControl = (props) => {
       {typeControlList}
       </div>
       <div className="trend-control-block">
-      {<CheckboxGroup options={effectOptions} defaultValue={[]} onChange={props.handleEffect} />}
+      {<CheckboxGroup 
+        options={effectOptions} 
+        defaultValue={[]}
+        value={[props.showLine ? 'line' : '', props.showMiss ? 'miss' : '']}
+        onChange={props.handleEffect} />}
       </div>
       <div className="trend-control-block-right">
       {filterControlList}
