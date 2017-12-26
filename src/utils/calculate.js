@@ -98,15 +98,23 @@ export const calculateGroup = (numberList) => {
   if ((_.invert(counts))[3]) {
     return '豹子'
   } else if ((_.invert(counts))[2]) {
-    return '组六'
-  } else {
     return '组三'
+  } else {
+    return '组六'
   }
 }
 
 // 为数量加上逗号
 export const numberWithCommas = (x) => {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// 计算平均遗漏值
+export const calculateAvgMiss = (number, dataLength) => {
+  if (number === 0) {
+    return 0
+  }
+  return Math.floor((dataLength - number) / number)
 }
 
 

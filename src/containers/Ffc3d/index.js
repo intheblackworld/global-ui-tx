@@ -14,6 +14,7 @@ import UnFinishHint from 'components/UnFinishHint'
 
 import TableContainer from 'containers/TableContainer'
 import Combo from 'containers/Combo'
+import Trend from 'containers/Trend'
 
 @connect(
   state => ({

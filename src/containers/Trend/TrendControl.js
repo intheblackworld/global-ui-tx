@@ -29,15 +29,18 @@ const TrendControl = (props) => {
       key: 'limit',
       value: 30,
       name: '近30期'
-    }, {
-      key: 'limit',
-      value: 50,
-      name: '近50期'
-    }, {
-      key: 'limit',
-      value: 100,
-      name: '近100期'
-    }, {
+    },
+    // {
+    //   key: 'limit',
+    //   value: 50,
+    //   name: '近50期'
+    // },
+    //  {
+    //   key: 'limit',
+    //   value: 100,
+    //   name: '近100期'
+    // }, 
+    {
       key: 'days',
       value: 1,
       name: '今日'
@@ -61,10 +64,17 @@ const TrendControl = (props) => {
 
   // const checkboxList = mapWithIndex()()
   return (
-    <div>
+    <div className="trend-control">
+      <div className="trend-control-block">
       {typeControlList}
+      </div>
+      <div className="trend-control-block">
       {<CheckboxGroup options={effectOptions} defaultValue={[]} onChange={props.handleEffect} />}
+      </div>
+      <div className="trend-control-block-right">
       {filterControlList}
+      </div>
+      <div className="clearfix"></div>
     </div>
   )
 }

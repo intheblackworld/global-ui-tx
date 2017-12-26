@@ -82,8 +82,7 @@ class Ffc extends Component {
           <Combo comboControlType={'ffc'}/>
           </TabPane>
           <TabPane tab="走势分析" key="3">
-            <UnFinishHint desc={'开发中，敬请期待...'}/>
-            {/* <Trend ticketId={31} /> */}
+            <Trend ticketId={31} />
           </TabPane>
           <TabPane tab="开奖说明" key="4">
             <RuleDescription type={'ffc'}/>
