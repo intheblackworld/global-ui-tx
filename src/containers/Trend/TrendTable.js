@@ -12,7 +12,7 @@ const mapWithIndex = addIndex(map)
 
 const TrendTable = (props) => {
 
-  const { trendList } = props
+  const { trendList, isFetching } = props
 
   const dataLength = trendList.trendsList.length
 
@@ -274,6 +274,7 @@ const TrendTable = (props) => {
       columns={props.trendTypeId === 1 ? BasicTrendColumns : CompositeTrendColumns}
       rowClassName="table-row"
       pagination={false}
+      loading={isFetching}
     />
     {
       props.showLine && (

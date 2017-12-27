@@ -19,11 +19,12 @@ import Trend from 'containers/Trend'
 @connect(
   state => ({
     txCollection: state.txList,
-    txCurrent: state.txCurrent
+    txCurrent: state.txCurrent,
+    isFetching: state.isFetching.isFetching
   }),
   dispatch => ({
     fetchTx: () => dispatch(fetchTx()),
-    fetchTxList: (reqData) => dispatch(fetchTxList(reqData))
+    fetchTxList: (reqData) => dispatch(fetchTxList(reqData)),
   })
 )
 class Ffc3d extends Component {
@@ -56,7 +57,7 @@ class Ffc3d extends Component {
 
   render() {
     const { dataList, rowCount } = this.props.txCollection
-    const { txCurrent } = this.props
+    const { txCurrent, isFetching } = this.props
 
     const TabPane = Tabs.TabPane;
 
@@ -74,6 +75,7 @@ class Ffc3d extends Component {
               needPageSize={false}
               needPagination={false}
               needFilter={true}
+              isFetching={isFetching}
             />
           </TabPane>
           <TabPane tab="路珠分析" key="2">

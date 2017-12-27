@@ -13,7 +13,8 @@ import './index.scss'
 
 @connect(
   (state) => ({
-    trendList: state.trendList
+    trendList: state.trendList,
+    isFetching: state.isFetching.isFetching
   }),
   dispatch => ({
     fetchTrendList: (data) => dispatch(fetchTrendList(data))
@@ -110,7 +111,7 @@ class Trend extends Component {
   }
 
   render() {
-    const { trendList } = this.props
+    const { trendList, isFetching } = this.props
     const { currentFilterValue, currentTrendTypeId, trendTypeId, showLine, showMiss } = this.state
     return (
       <div className="trend">
@@ -128,6 +129,7 @@ class Trend extends Component {
           trendTypeId={trendTypeId}
           showLine={showLine}
           showMiss={showMiss}
+          isFetching={isFetching}
         />
         <div className="trend-desc">
           <p><span>出现总次数：</span>指在选定的期数范围内开出号码的总次数</p>

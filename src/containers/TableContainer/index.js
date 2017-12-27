@@ -42,6 +42,7 @@ class TableContainer extends Component {
     needPageSize: PropTypes.bool.isRequired,
     needPagination: PropTypes.bool.isRequired,
     needFilter: PropTypes.bool.isRequired,
+    isFetching: PropTypes.bool,
   }
 
 
@@ -130,7 +131,7 @@ class TableContainer extends Component {
   }
 
   render() {
-    const { txList, rowCount } = this.props
+    const { txList, rowCount, isFetching } = this.props
 
     const {
       needDatePicker,
@@ -218,6 +219,7 @@ class TableContainer extends Component {
           dataSource={dataSource}
           columns={Columns(this.openDialogHandler)}
           rowClassName="table-row"
+          loading={isFetching}
           pagination={
             needPagination ?
               {

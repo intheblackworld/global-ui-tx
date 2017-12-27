@@ -15,7 +15,8 @@ import './index.scss'
 @connect(
   state => ({
     txCollection: state.txList,
-    txCurrent: state.txCurrent
+    txCurrent: state.txCurrent,
+    isFetching: state.isFetching.isFetching
   }),
   dispatch => ({
     fetchTx: () => dispatch(fetchTx()),
@@ -34,7 +35,8 @@ class Home extends Component {
     txCollection: PropTypes.object.isRequired,
     txCurrent: PropTypes.object.isRequired,
     fetchTx: PropTypes.func.isRequired,
-    fetchTxList: PropTypes.func.isRequired
+    fetchTxList: PropTypes.func.isRequired,
+    isFetching: PropTypes.bool,
   }
   componentDidMount() {
     this.props.fetchTxList({
@@ -51,7 +53,7 @@ class Home extends Component {
 
   render() {
     const { dataList, rowCount } = this.props.txCollection
-    const { txCurrent } = this.props
+    const { txCurrent, isFetching } = this.props
     return (
       <div>
         <OnlineCount {...txCurrent} type={'normal'} />
@@ -65,6 +67,7 @@ class Home extends Component {
             needPageSize={true}
             needPagination={true}
             needFilter={false}
+            isFetching={isFetching}
           />
         </div>
       </div>

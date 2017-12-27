@@ -10,11 +10,13 @@ export const fetchTxListSuccess = (payload) => {
 
 export const fetchTxList = (data) => {
   return (dispatch) => {
+    dispatch(requestPost())
     return axios({
       url: '/lottery/open/txlist.json',
       data: data
     })
       .then(res => {
+        dispatch(receivePost())
         dispatch(fetchTxListSuccess(res.data.root))
       })
       .catch(error => {
@@ -30,6 +32,14 @@ export const fetchTxSuccess = (payload) => {
     payload
   }
 }
+
+export const requestPost = () => ({
+  type: 'REQUEST_POST'
+})
+
+export const receivePost = () => ({
+  type: 'RECEIVE_POST'
+})
 
 export const fetchTx = () => {
   return (dispatch) => {
@@ -62,7 +72,7 @@ export const fetchComboList = (data) => {
         return response.json()
       })
       .then((res) => {
-        return dispatch(fetchComboListSuccess(res.root))
+        dispatch(fetchComboListSuccess(res.root))
       })
       .catch(error => {
         throw (error)
@@ -85,12 +95,14 @@ export const fetchTrendList = (data) => {
     url: 'sscTrend.json',
   })
   return (dispatch) => {
+    dispatch(requestPost())
     return jsonp(data)
       .then(response => {
         return response.json()
       })
       .then((res) => {
-        return dispatch(fetchTrendListSuccess(res.root))
+        dispatch(receivePost())
+        dispatch(fetchTrendListSuccess(res.root))
       })
       .catch(error => {
         throw (error)
