@@ -54,7 +54,7 @@ class TableContainer extends Component {
       // 除了首页有分页之外，其他页面没有分页，所以 pageSize 设成1440就可
       pageIndex: 0,
     })
-    this.setState({ day: value })
+    this.setState({ day: value, pageIndex: 0 })
   }
 
   handlePageSizeChange(value) {
@@ -72,6 +72,10 @@ class TableContainer extends Component {
       day: this.state.day,
       pageSize: pageSize,
       pageIndex: page - 1,
+    })
+
+    this.setState({
+      pageIndex: page
     })
   }
 
@@ -219,14 +223,15 @@ class TableContainer extends Component {
           dataSource={dataSource}
           columns={Columns(this.openDialogHandler)}
           rowClassName="table-row"
-          loading={isFetching}
+          isFetching={isFetching}
           pagination={
             needPagination ?
               {
                 showQuickJumper: true,
                 total: rowCount,
                 pageSize: this.state.pageSize,
-                onChange: this.handlePageIndexChange
+                onChange: this.handlePageIndexChange,
+                current: this.state.pageIndex
               } : false
           }
         />

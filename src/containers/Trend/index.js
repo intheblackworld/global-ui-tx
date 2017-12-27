@@ -101,13 +101,36 @@ class Trend extends Component {
     })
   }
 
-  componentDidMount() {
+  fetchInitData() {
     this.props.fetchTrendList({
       ticketId: this.props.ticketId,
       limit: 30,
       days: '',
       trendTypeId: 1,
     })
+  }
+
+  fetchDataByCurrentConfig() {
+    const { currentFilterValue, currentTrendTypeId } = this.state
+    this.props.fetchTrendList({
+      ticketId: this.props.ticketId,
+      limit: currentFilterValue >= 30 ? currentFilterValue : '',
+      days: currentFilterValue < 30 ? currentFilterValue : '',
+      trendTypeId: currentTrendTypeId
+    })
+  }
+
+  componentDidMount() {
+    this.fetchInitData()
+
+    this.intervalFetch = setInterval(() => {
+      this.fetchDataByCurrentConfig()
+    }, 1000 * 120)
+    
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalFetch)
   }
 
   render() {

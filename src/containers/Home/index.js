@@ -38,17 +38,52 @@ class Home extends Component {
     fetchTxList: PropTypes.func.isRequired,
     isFetching: PropTypes.bool,
   }
-  componentDidMount() {
+
+
+  fetchInitData() {
     this.props.fetchTxList({
       day: toDate(moment()),
       pageSize: 20,
       pageIndex: 0
     })
     this.props.fetchTx()
+    this.setState({
+      configDay: toDate(moment()),
+      configPageSize: 20,
+      configPageIndex: 0
+    })
+  }
+
+  fetchDataByCurrentConfig() {
+    const { configDay, configPageSize, configPageIndex } = this.state
+    this.props.fetchTxList({
+      day: configDay,
+      pageSize: configPageSize,
+      pageIndex: configPageIndex
+    })
+    this.props.fetchTx()
+  }
+  
+  componentDidMount() {
+    this.fetchInitData()
+
+    this.intervalFetch = setInterval(() => {
+      this.fetchDataByCurrentConfig()
+    }, 1000 * 60)
+
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalFetch)
   }
 
   handleQueryChange(data) {
     this.props.fetchTxList(data)
+    this.setState({
+      configDay: data.day,
+      configPageSize: data.pageSize,
+      configPageIndex: data.pageIndex
+    })
   }
 
   render() {

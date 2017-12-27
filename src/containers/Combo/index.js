@@ -96,10 +96,11 @@ class Combo extends Component {
   }
 
 
-  componentDidMount() {
+  fetchInitData() {
     const { comboControlType } = this.props
     const { limit, locations, currentLocation } = this.state
     const config = this.getConfigByType(comboControlType)
+
     this.props.fetchComboList({
       ticketId: config.ticketId, // 31 //分分彩  36 //3D彩
       limit: 100, // 近100期
@@ -114,6 +115,32 @@ class Combo extends Component {
     })
   }
 
+  fetchDataByCurrentConfig() {
+    const { comboControlType } = this.props
+    const { currentLimit, currentLocation } = this.state
+    const config = this.getConfigByType(comboControlType)
+    this.props.fetchComboList({
+      ticketId: config.ticketId, // 31 //分分彩  36 //3D彩
+      limit: currentLimit, // 近100期
+      locations: currentLocation, // // 0,1,2,3,4,99: 万, 千, 百, 十, 个, 总和
+      types: config.types // 10,11,47 大小, 单双, 龙虎
+    })
+  }
+
+
+  componentDidMount() {
+    this.fetchInitData()
+
+    this.intervalFetch = setInterval(() => {
+      this.fetchDataByCurrentConfig()
+    }, 1000 * 60)
+
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalFetch)
+  }
+
   render() {
     const { comboControlType } = this.props
     const { currentLimit, currentLocation } = this.state
@@ -121,16 +148,16 @@ class Combo extends Component {
     return (
       <div className="combo">
         {/* 路珠控制元件 */}
-        <ComboControl 
-          {...controlConfig} 
-          handleControlChange={this.handleControlChange} 
+        <ComboControl
+          {...controlConfig}
+          handleControlChange={this.handleControlChange}
           currentLocation={currentLocation}
         />
         {/* 路珠渲染元件 */}
-        <ComboContainer 
-          currentLimit={currentLimit} 
-          {...this.props} 
-          {...controlConfig} 
+        <ComboContainer
+          currentLimit={currentLimit}
+          {...this.props}
+          {...controlConfig}
           handleLimitChange={this.handleLimitChange}
         />
         <div className="combo-desc">*当连续开出的相同号码属性中断时，则另起一列显示；</div>
